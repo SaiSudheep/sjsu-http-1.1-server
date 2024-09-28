@@ -1,0 +1,496 @@
+html {
+    scroll-behavior: auto !important;
+}
+
+.vimeo-showcase {
+    position: relative;
+    display: block;
+}
+
+.vimeo-showcase * {
+    box-sizing: border-box;
+}
+
+.vimeo-showcase__info-wrap {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100px;
+}
+
+.vimeo-showcase__featured {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.close-button {
+    color: white;
+}
+
+.vimeo-showcase__featured--graphic {
+    width: 100%;
+    position: relative;
+    padding-top: 56.25%;
+    overflow: hidden;
+}
+
+.vimeo-showcase__featured--live,
+.vimeo-showcase__featured--upcoming {
+    background: #A82428;
+    position: absolute;
+    padding: 0 7px;
+    color: #fff;
+    border-radius: 3px;
+    top: .5rem;
+    left: auto;
+    right: 0.5rem;
+    letter-spacing: 2px;
+    font-weight: 500;
+    z-index: 1;
+    font-size: .9em;
+}
+
+.vimeo-showcase__featured--live {
+    box-shadow: 0 0 0 0 rgba(168, 36, 40, 1);
+    animation: pulse 1.5s infinite;
+}
+
+.vimeo-showcase__featured--upcoming {
+    background: #0055a8;
+}
+
+
+
+.vimeo-showcase__featured--img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.vimeo-showcase__featured--title {
+    position: relative;
+    bottom: 0;
+    padding: 35px 30px 30px 30px;
+    width: 100%;
+    height: auto;
+    background-color: #0055a8;
+}
+
+.vimeo-showcase__featured--title p {
+    margin: 0;
+    color: #fff;
+}
+
+.vimeo-showcase__featured--play-btn svg {
+    width: 100px;
+    position: absolute;
+    top: -75px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.vimeo-showcase__featured--title .play-btn-triangle {
+    fill: #fff;
+}
+
+.vimeo-showcase__featured--title .play-btn-circle {
+    fill: #e5a823;
+}
+
+.vimeo-showcase__featured--title .play-btn-circle-2 {
+    fill: #e5a823;
+    transform: scale(0);
+    transform-origin: center;
+    transition: all ease-in-out .15s;
+}
+
+.vimeo-showcase__featured--play-btn svg:hover .play-btn-circle-2,
+.vimeo-showcase__featured--play-btn:focus svg .play-btn-circle-2 {
+    fill: #0055a8;
+    transform: scale(1);
+    transition: all ease-in-out .15s;
+}
+
+.vimeo-showcase__featured--title .play-btn-outer-circle {
+    fill: rgba(255, 255, 255, 0.25)
+}
+
+.vimeo-showcase__playlist {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+
+
+.vimeo-showcase__playlist .swiper {
+    width: calc(100% - 120px);
+    overflow: visible;
+}
+
+.vimeo-showcase__playlist .swiper-wrapper {
+    min-height: 300px;
+}
+
+.vimeo-showcase__playlist--nav-btn {
+    position: absolute;
+    background: #d2d2d2;
+    height: 100%;
+    width: 44px;
+    bottom: 0;
+    z-index: 1;
+    font-size: 3rem;
+    font-family: 'Nunito Sans';
+    line-height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.vimeo-showcase__playlist--nav-btn:hover {
+    background: #ccc;
+}
+
+.vimeo-showcase__playlist--nav-btn.swiper-btn-prev {
+    left: 0;
+
+}
+
+.vimeo-showcase__playlist--nav-btn.swiper-btn-prev img {
+    height: 25px;
+}
+
+.vimeo-showcase__playlist--nav-btn.swiper-btn-next {
+    right: 0;
+
+}
+
+.vimeo-showcase__playlist--nav-btn.swiper-btn-next img {
+    height: 25px;
+}
+
+.vimeo-showcase__playlist--nav-btn.swiper-button-disabled {
+    cursor: auto;
+    opacity: .33;
+}
+
+.vimeo-showcase__item {
+    background: #ededed;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    cursor: pointer;
+}
+
+
+
+.vimeo-showcase__item:active {
+    cursor: grabbing;
+}
+
+.vimeo-showcase__item--graphic {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.vimeo-showcase__item img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    object-fit: cover;
+}
+
+.vimeo-showcase__item--live,
+.vimeo-showcase__item--upcoming {
+    background: #A82428;
+    display: inline-block;
+    padding: 2px 7px;
+    color: #fff;
+    border-radius: 3px;
+    top: 5px;
+    left: 5px;
+    letter-spacing: 2px;
+    position: absolute;
+    font-weight: 500;
+    font-size: .7em;
+}
+
+.vimeo-showcase__item--live {
+    box-shadow: 0 0 0 0 rgba(168, 36, 40, 1);
+    animation: pulse 1.5s 5;
+}
+
+.vimeo-showcase__item--upcoming {
+    background: #0055a8;
+}
+
+.vimeo-showcase__item--title {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    padding: 1rem;
+    min-height: auto;
+    position: relative;
+
+}
+
+.vimeo-showcase__item--title p {
+    margin: 0;
+    font-size: 0.7826rem;
+}
+
+
+
+.vimeo-showcase__item--play-btn svg {
+    width: 50px;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    cursor: pointer;
+}
+
+
+.vimeo-showcase__item--graphic .play-btn-triangle {
+    fill: #fff;
+}
+
+.vimeo-showcase__item--graphic .play-btn-circle {
+    fill: #e5a823;
+}
+
+.vimeo-showcase__item--graphic .play-btn-circle-2 {
+    fill: #0055a8;
+    transform: scale(0);
+    transform-origin: center;
+    transition: all ease-in-out .15s;
+}
+
+.vimeo-showcase__item:hover .vimeo-showcase__item--play-btn svg .play-btn-circle-2,
+.vimeo-showcase__item:focus .vimeo-showcase__item--play-btn svg .play-btn-circle-2 {
+    fill: #0055a8;
+    transform: scale(1);
+    transition: all ease-in-out .15s;
+}
+
+#modal-1 {
+    position: absolute;
+    z-index: 1337;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #1C88F4;
+}
+
+#modal-1 .modal__overlay {
+    background-color: rgba(10, 10, 10, 0.75);
+    align-items: start;
+    overflow: auto;
+}
+#modal-1 .modal__container{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    max-width: 1025px;
+    overflow: visible;
+    margin-right: auto;
+    margin-left: auto;
+    position: absolute;
+    top: 4rem;
+}
+#modal-1 .player {
+    padding-top: 56.25%;
+    height: 100%;
+    width: 100%;
+    max-width: none !important;
+    overflow: visible;
+    background: #ededed;
+    position: relative;
+}
+
+#modal-1 iframe {
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    height: 100%;
+
+}
+
+#modal-1 .close-button {
+    font-size: 3em;
+}
+
+#modal-1 .vimeo-video-reveal__info {
+    z-index: 1;
+    width: 100%;
+    background: #ededed;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+#modal-1 p.vimeo-video-reveal__title {
+    display: inline;
+    color: #0055a8;
+}
+
+#modal-1 a:hover p.vimeo-video-reveal__title,
+#modal-1 a:focus p.vimeo-video-reveal__title {
+    color: #007aff;
+}
+
+#modal-1 p.vimeo-video-reveal__description {
+    font-size: 0.7826rem;
+    margin: 0;
+}
+
+
+.vimeo-showcase-loader,
+.vimeo-video-loader {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s linear;
+    flex-direction: column;
+}
+
+.vimeo-video-loader {
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+.vimeo-showcase-loader .loader,
+.vimeo-video-loader .loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 3px solid #007aff;
+    border-right: 3px solid transparent;
+    animation: vimeoLoaderRotation 1s linear infinite;
+}
+
+@keyframes vimeoLoaderRotation {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(168, 36, 40, 1);
+    }
+
+    85% {
+        box-shadow: 0 0 0 .5rem rgba(168, 36, 40, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(168, 36, 40, 0);
+    }
+}
+
+
+@media screen and (min-width: 1024px) {
+    .vimeo-showcase {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .vimeo-showcase__featured {
+        margin-bottom: 0;
+        width: calc(50% - .5rem);
+    }
+
+    .vimeo-showcase__featured.single-vid {
+        width: 100%;
+    }
+
+    .vimeo-showcase__featured--graphic {
+        background-color: #0055a8;
+        padding-top: 56.25%;
+    }
+
+    .vimeo-showcase__featured--graphic::after {
+        background-color: #0055a8;
+        background: linear-gradient(180deg, rgba(0, 85, 168, 0) 0%, rgba(0, 85, 168, 1) 55%, rgba(0, 85, 168, 1) 100%);
+    }
+
+    .vimeo-showcase__featured--img {
+        object-fit: contain;
+    }
+
+    .vimeo-showcase__featured--live,
+    .vimeo-showcase__featured--upcoming {
+        border-radius: 4px;
+    }
+    .vimeo-showcase__item{
+        flex-direction: row;
+    }
+
+    .vimeo-showcase__item--graphic {
+        height: 100%;
+        width: 85%;
+        max-width: 400px;
+    }
+
+    .vimeo-showcase__info-wrap {
+        position: absolute;
+        right: 0;
+        top: 0;
+        left: auto;
+        width: calc(50% - .5rem);
+        height: 100%;
+    }
+
+    .vimeo-showcase__playlist {
+        position: relative;
+        height: 100%;
+    }
+
+    .vimeo-showcase__playlist .swiper {
+        width: 100%;
+        height: calc(100% - 135px);
+        margin-top: 68px;
+    }
+
+    .vimeo-showcase__playlist--nav-btn {
+        height: 44px;
+        width: 100%;
+        border: none;
+    }
+
+    .vimeo-showcase__playlist--nav-btn.swiper-btn-prev {
+        top: 0;
+        left: 0;
+    }
+
+    .vimeo-showcase__playlist--nav-btn.swiper-btn-prev img {
+        transform: rotate(90deg);
+    }
+
+    .vimeo-showcase__playlist--nav-btn.swiper-btn-next img {
+        transform: rotate(90deg);
+    }
+}

@@ -1,0 +1,1606 @@
+/*
+Implementation Skeleton v3 - 12/6/18
+Add styles to overwrite customer CSS, USE WITH CAUTION.
+*/
+
+/* css global var(--cpge-name) */
+:root {
+	--cpge-color-spartanyellow:#e5a823;
+	--cpge-color-spartanblue: #0055a2;
+	--cpge-color-spartanltblue: #dbeeff;
+	--cpge-color-text: #0a0a0a;
+	--cpge-color-reversedtext: #fefefe;
+	--cpge-color-feature-grid-link-yellow: var(--cpge-color-spartanyellow);
+	--cpge-color-feature-grid-link-ltblue: var(--cpge-color-spartanltblue);
+	--background-pattern-triangle: url(../../../_resources-cpge/img/feature-grid-1.png);
+}
+
+
+
+
+/* util:: remove, hide, or collapse empty elements or images */
+:not(img).remove-if-empty:empty, img[src=''].remove-if-empty {
+	display: none;
+}
+
+:not(img).hide-if-empty:empty, img[src=''].hide-if-empty {
+	visibility: hidden;
+}
+
+:not(img).collapse-if-empty:empty, img[src=''].collapse-if-empty {
+	height:0px;
+	width:0px;
+	overflow: hide;
+}
+
+/* util:: watermark any placeholder images that are in a directory named 'fpo' */
+*[style*="/fpo/"]:after {
+    content: '-- FPO --\A for position only - image cannot be published without permission';
+    position: relative;
+    display: block;
+    top: 1rem;
+    left: 1rem;
+    height: calc(100% - 2rem);
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    margin-bottom: -100%;
+    font: bold 1.6rem sans-serif;
+    color: #fbe982;
+    background-color: black;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+*[style*="/fpo/"] {
+    border: 1.25rem black dashed;
+    opacity: 0.7;
+}
+
+
+/* util:: watermark any placeholder images that are in a directory named 'pics-review' */
+*[style*="/pics-review/"]:after {
+    content: '-- FPO --\A for position only - do not publish this page without image review. For review, submit URL and image clearance info to content-marketing-group@sjsu.edu';
+    position: relative;
+    display: block;
+    top: 1rem;
+    left: 1rem;
+    height: calc(100% - 2rem);
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    margin-bottom: -100%;
+    font: bold 1.6rem sans-serif;
+    color: #fbe982;
+    background-color: black;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+*[style*="/pics-review/"] {
+    border: 1.25rem black dashed;
+    opacity: 0.7;
+}
+
+
+
+/* Reduced Motion global switch */
+@media screen and (prefers-reduced-motion: reduce) {
+  * {
+	  animation-duration: 0s !important;
+	  -webkit-animation-duration: 0s !important;
+	  transition-duration: 0s !important;
+	  -webkit-transition-duration: 0s !important;
+  }
+}
+
+/* Exempt anchors from link styling                */
+/* Overrides <a> and a:after in main.css li:12790  */
+/* To avoid <p> getting stripped, add &zwnj;
+/* lhw - CPGE DDS */
+
+p:has(a:not([href])[id]:only-child), 
+a:not([href])[id] {
+	/*  empty-element-selector__display: none; */
+}
+
+.page-anchor {
+	height: 0px;
+	overflow: hidden;
+	padding: 0px;
+	margin: 0px;
+}
+
+/* Managing collapsed margins between components */
+/* that become uncollapsed when an element is     */
+/* placed between them. */
+@media print, screen and (min-width: 64em) {
+	.component ~ .page-anchor {
+		margin-bottom: -5.625rem;
+	}
+}
+
+.component ~ .page-anchor {
+	margin-bottom: -2.8125rem;
+}	
+/* NOTE: there are buttons with no href with click events, */
+/* for example the cookie banner button */
+
+/* NOTE...there is an empty <a class="card-program__olink">   */
+/* on each program in the on related programs component,  */
+/* being added at /aspis/cpge/dmc/php/programs.php li:330 */
+/* set to  display:none at main.css li:12790              */
+/* THEREFORE selectors :empty() will not work here */
+/* 2024-03-01 Removed the below due to above more targeted fix */
+
+
+
+/* Header overrides, desktop only. SJSU Header has */
+/* z-index, but CPGE header does not. Moving       */
+/* CPGE header  lower in stacking order.           */
+/* Expire this change after header encapsulation   */
+/* work is completed.                              */
+/* Current source: see individual                  */
+/* lhw - CPGE DDS */
+@media print, screen and (min-width: 64em) {
+	/* Lower stacking order of CPGE header */
+	/* Expire this change after migration to source     */
+	/* Current source: see individual                   */
+	/* lhw - CPGE DDS */
+	HEADER.global-header {
+		z-index: 100;  /* _global-header.scss:48 */
+	}
+
+	/* Lower stacking order of announcements list in  CPGE header */
+	/* Expire this change after migration to source     */
+	/* Current source: see individual                   */
+	/* lhw - CPGE DDS */
+	HEADER.global-header .announcements__list {
+		z-index: 99;  /*  _announcements.scss:95  */
+	}
+}
+
+
+
+/* Minimized mobile megamenu for soft launch */
+#globalnav #globalnav-menu {
+	max-height: 0vh;
+	padding-bottom: 0rem;
+	overflow: hidden;
+	-webkit-transition: max-height .3s ease, padding-bottom .3s ease;
+	transition: max-height .3s ease, padding-bottom .3s ease;
+}
+#globalnav #globalnav-menu.open {
+	max-height: 100vh;
+	padding-bottom: .5rem;
+	-webkit-transition: max-height .4s ease, padding-bottom .4s ease;
+	transition: max-height .4s ease, padding-bottom .4s ease;
+}
+#globalnav #globalnav-menu > UL > LI.o-nav--global__item {
+	margin: 1.25rem 0;
+}
+#globalnav #globalnav-menu LI.o-nav--global__item.o-nav--global__item--nested {
+	display: none;
+	margin: .75rem 2rem;
+}
+
+/* Headings */
+DIV#globalnav-desktop  A.amm-o-nav__heading { /* header-footer.css */
+	word-break: initial;
+	word-wrap: initial;
+}
+
+/* Items  */
+.amm-o-nav__group:not(:last-child) {
+	flex-grow: 1;
+}
+UL.amm-o-nav__list LI.amm-o-nav__item {
+	padding: .3em 0;
+}
+
+/* Brand panel */
+DIV#globalnav-desktop DIV.amm-o-nav__identity {
+	padding: .75rem 0 1.3rem;
+}
+
+DIV#globalnav-desktop DIV.amm-o-nav__identity .amm-o-nav__app LI {
+	font-family: 'Nunito Sans',Verdana,sans-serif;
+	font-size: 1rem;
+	color: #333333;
+	letter-spacing: 0;
+	text-align: left;
+	line-height: 1.5;
+}
+
+DIV#globalnav-desktop DIV.amm-o-nav__identity .amm-o-nav__app A {
+	display: block;
+	background-position: left;
+	background-repeat: no-repeat;
+	padding: 0.35rem 0.1rem 0.15rem 2.25rem;
+	margin-right: 1.5rem;
+	font-size: 1.125rem;
+}
+
+DIV#globalnav-desktop .u-icon--sjsuonline.u-color--white {
+    background-image: url(../../media/icons/apps/icon-sjsuonline-white.svg);
+}
+
+/* Gradient lower border */
+DIV#globalnav-desktop .amm-o-nav__panel.u-bg--triangles-down-big.open:after {
+	content: '';
+	background: linear-gradient(90deg, #1c88f4 0%, #e5a823 73%) 100% 0 no-repeat;
+    display: block;
+    float: right;
+    width: 100%;
+    height: 10px;
+}
+
+/* Desktop small */
+@media print, screen and (min-width: 48em) {
+	DIV#globalnav-desktop  A.amm-o-nav__heading { /* header-footer.css */
+		font-size: .9rem;
+	}
+	UL.amm-o-nav__list LI.amm-o-nav__item  {
+		font-size: .9rem;
+	}
+}
+
+@media print, screen and (min-width: 70em) {
+	DIV#globalnav-desktop  A.amm-o-nav__heading { /* header-footer.css */
+		font-size: 1rem;
+	}
+	UL.amm-o-nav__list LI.amm-o-nav__item  {
+		font-size: 1rem;
+	}
+}
+
+/* Desktop large */
+@media print, screen and (min-width: 80em) {
+	DIV#globalnav-desktop  A.amm-o-nav__heading { /* header-footer.css */
+		font-size: 1rem;
+	}
+	UL.amm-o-nav__list LI.amm-o-nav__item  {
+		font-size: 1.1875rem;
+	}
+}
+
+/* ==========  end ==========  */
+
+
+
+/* Elevate basic typography for initial site launch */
+/* Expire this change after migration to source     */
+/* Current source: see individual                   */
+/* lhw - CPGE DDS */
+/* reset font */
+MAIN {
+	font-family: Helvetica Neue,helvetica,roboto,arial,sans-serif; /* _headings.scss -> _base.scss -> _global.scss */
+	font-size: 1.375rem; /* _headings.scss -> _base.scss -> _global.scss */
+	font-weight: 300;    /* _headings.scss -> _base.scss -> _global.scss */
+	line-height: 1.5;    /* _headings.scss -> _base.scss -> _global.scss normalize.scss */
+	/* color: #0a0a0a;   do not set, color is well-managed. accordion.scss -> _feature-tabs.scss -> _base.scs -> _global.scss -> _defaults.scss */
+}
+
+/* ==========  end ==========  */
+
+
+/* Exceptions for reversed color links & transition background 
+hover text color:  _media.scss:111
+text color transition: _links.scss:2
+background element (a:before) color: _media.scss:111
+background element (a:before) transition: _links.scss:9
+*/
+.filter-keyword DIV.filter-keyword__inner a:not(.tags__link) {
+	display: inline-block;
+	padding: 0.25rem 0.125rem;
+	position: relative;
+	-webkit-transition: color .2s ease;
+	transition: color .2s ease;
+}
+
+.filter-keyword DIV.filter-keyword__inner a:not(.tags__link):where(:link, :visited) {
+	color: var(--cpge-color-reversedtext);
+}
+
+.filter-keyword DIV.filter-keyword__inner a:not(.tags__link):where(:active, :focus, :hover) {
+	color: var(--cpge-color-spartanblue);
+}
+
+.filter-keyword DIV.filter-keyword__inner a:not(.tags__link)::before {
+	position: absolute;
+	display: block;
+	bottom: 0.375rem;
+	height: 0.125rem;
+	left: 0;
+	width: 100%;
+	content: "";
+	background-color: var(--cpge-color-reversedtext);
+	-webkit-transition: background-color .2s ease,height .2s ease;
+	transition: background-color .2s ease,height .2s ease;
+	z-index: -1;
+}
+
+.filter-keyword DIV.filter-keyword__inner a:is(:active, :focus, :hover)::before {
+	color: var(--cpge-color-spartanblue);
+	height: calc(100% - 0.75rem);
+	width: 100%;
+}
+
+/* ==========  end ==========  */
+
+
+/* HEADINGS _headings.scss:98 */
+MAIN :where(H1, H2, H3, H4, H5, H6):not([class]) {
+	color: var(--cpge-color-spartanblue);
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+}
+
+/* Headings size spreads _headings.scss:89 */
+.font-h1, h1 {
+    font-size: 2.875rem;
+}
+.font-h2, h2 {
+    font-size: 2.575rem;
+}
+.font-h3, h3 {
+    font-size: 2.275rem;
+}
+.font-h4, h4 {
+    font-size: 1.975rem;
+}
+.font-h5, h5 {
+    font-size: 1.675rem;
+}
+.font-h6, h6 {
+    font-size: 1.375rem;
+}
+
+/* H3 Program Card first line leading adjustment */
+h3.card-program__heading.font-h5 {
+	margin-top: -0.6rem;
+}
+/* ==========  end ==========  */
+
+
+
+/* Lists and list markers in free */
+/* text formatted per design      */
+/* Exclude ULs with class         */
+MAIN :is(UL:not([class]), OL:not([class])) {
+	margin-left: 40px;
+	font-size: 1.375rem;
+}
+
+/* Ordered lists */
+/* First-level marker */
+MAIN OL:not([class]) LI::marker {
+	color: var(--cpge-color-spartanblue); /* $endeavour */
+	font-weight: bold;
+}
+
+/* Overwrite mal-selected li at _placeholders.scss:17 */
+.accordions__item ol li {
+    list-style: inherit; /* default to initial, as iOS does not support ::marker pseudo selector */
+}
+
+.accordions__item ul li {
+	/* default to square, as iOS does not support ::marker pseudo selector */
+	/* list-style: square; commenting for tests */
+}
+
+
+
+/* Unordered lists */
+/* NEW: using :before, as iOS does not support ::marker pseudo selector as of 202406 v.17 */
+/* 2024-06-13 lhw */
+
+MAIN UL:not([class]) > LI, 
+MAIN UL:not([class])  LI > UL > LI, 
+MAIN UL:not([class]) LI > UL > LI > UL > LI {
+	list-style: none;
+}
+
+MAIN UL:not([class]) > LI::marker, 
+MAIN UL:not([class])  LI > UL > LI::marker, 
+MAIN UL:not([class]) LI > UL > LI > UL > LI::marker {
+	content:'';
+}
+
+MAIN UL:not([class]) > LI::before, 
+MAIN UL:not([class])  LI > UL > LI::before, 
+MAIN UL:not([class]) LI > UL > LI > UL > LI::before {
+	color: var(--cpge-color-spartanblue); /* $endeavour */
+	vertical-align: top;
+	display: inline-block;
+	width: 1em;
+	margin-left: -1em;
+}
+
+/* First-level marker */
+MAIN UL:not([class]) > LI::before {
+	content: '\25A0  ';
+}
+
+/* Second-level marker */
+MAIN UL:not([class])  LI > UL > LI::before {
+	content: '\25A1  ';
+}
+
+/* Third-level marker */
+MAIN UL:not([class]) LI > UL > LI > UL > LI::before {
+	content: '\23AF';
+    /* white-space: nowrap; */
+    margin-left: -2rem;
+    padding-right: 1.4em;
+}
+
+
+/* Reversed white markers */
+MAIN DIV:is(.media__content, .filter-keyword) UL:not([class]) LI::before, 
+MAIN DIV:is(.media__content, .filter-keyword) OL:not([class]) LI::before {
+	color: var(--cpge-color-reversedtext);
+}
+
+MAIN DIV:matches(.media__content, .filter-keyword) UL:not([class]) LI::before, 
+MAIN DIV:matches(.media__content, .filter-keyword) OL:not([class]) LI::before {
+	color: var(--cpge-color-reversedtext);
+}
+
+MAIN DIV:--webkit-any(.media__content, .filter-keyword) UL:not([class]) LI::before, 
+MAIN DIV:--webkit-any(.media__content, .filter-keyword) OL:not([class]) LI::before {
+	color: var(--cpge-color-reversedtext);
+}
+
+MAIN DIV:--webkit-any(.media__content, .filter-keyword) UL:not([class]) LI::before, 
+MAIN DIV:--webkit-any(.media__content, .filter-keyword) OL:not([class]) LI::before {
+	color: var(--cpge-color-reversedtext);
+}
+
+/* ========== end ========== */
+
+
+/* Reverse all typography color to white       */
+/* Prefer: reversing via contextual selectors  */
+/* lhw - CPGE DDS */
+.reverse {
+	color: var(--cpge-color-reversedtext);
+}
+/* ========== end ========== */
+
+
+/* Content Block Rows component */
+
+/* Override faculty image hover transition for linking */
+/* .card-faculty__image   _card-faculty.scss:14 */
+/* lhw */
+.content-block-rows.component .content-block-rows__row:hover  .content-block-rows__row-image {
+	transition: none;
+	background-size: auto 100%;
+}
+
+/* ========== end ========== */
+
+
+/* Blockquote component */
+.blockquote.component {
+	color: var(--cpge-color-text);
+/* 	background-color: initial;   no longer required */
+}
+
+.blockquote.component.pattern blockquote:after {
+    background-image: url(../../../_resources-cpge/img/next-steps.png);
+    background-position: 100%;
+    content: "";
+    display: block;
+    opacity: .04;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 110%;
+    width: auto;
+    z-index: -1;
+}
+
+.blockquote.component *:not(a) {
+	color: var(--cpge-color-text);
+	margin-bottom: 0px;
+}
+
+.blockquote.component a:not(.tags__link) {
+	display: inline-block;
+	padding: 0.25rem 0.125rem;
+	position: relative;
+	color: var(--cpge-color-text) !important;
+	-webkit-transition: color .2s ease;
+	transition: color .2s ease;
+}
+
+.blockquote.component a:not(.tags__link):where(:link, :visited) {
+	color: var(--cpge-color-text);
+}
+
+.blockquote.component a:not(.tags__link):where(:active, :focus, :hover) {
+	color: var(--cpge-color-spartanltblue) !important;
+}
+
+.blockquote.component a:not(.tags__link)::before {
+	position: absolute;
+	display: block;
+	bottom: 0.375rem;
+	height: 0.125rem;
+	left: 0px;
+	width: 100%;
+	content: "";
+	color: var(--cpge-color-text);
+	background-color: var(--cpge-color-spartanblue) !important;
+	-webkit-transition: background-color .2s ease,height .2s ease;
+	transition: background-color .2s ease,height .2s ease;
+	z-index: -1;
+}
+
+.blockquote.component a:is(:active, :focus, :hover)::before {
+	color: var(--cpge-color-spartanltblue);
+	height: calc(100% - 0.75rem);
+	width: 100%;
+}
+/* ========== end ========== */
+
+
+/* Standard link style for components with */
+/* dark blue background 			       */
+/* lhw - CPGE DDS */
+.block-dark-blue {
+	color: var(--cpge-color-reversedtext);
+	background-color: var(--cpge-color-spartanblue);
+}
+
+.blockquote.component.block-dark-blue.pattern blockquote:after   {
+    background-image: url(../../../_resources-cpge/img/feature-grid-1.png);
+	background-position: 100%;
+	content: "";
+	display: block;
+    opacity: .15;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+    height: 100%;
+	width: auto;
+	z-index: -1;
+}
+
+.blockquote.component.block-dark-blue *:not(a) {
+	color: var(--cpge-color-reversedtext) !important;
+}
+
+.blockquote.component.block-dark-blue a:not(.tags__link) {
+	display: inline-block;
+	padding: 0.25rem 0.125rem;
+	position: relative;
+	color: var(--cpge-color-reversedtext) !important;
+	-webkit-transition: color .2s ease;
+	transition: color .2s ease;
+}
+
+.blockquote.component.block-dark-blue a:not(.tags__link):where(:link, :visited) {
+	color: var(--cpge-color-reversedtext);
+}
+
+.blockquote.component.block-dark-blue a:not(.tags__link):where(:active, :focus, :hover) {
+	color: var(--cpge-color-spartanblue) !important;
+}
+
+.blockquote.component.block-dark-blue a:not(.tags__link)::before {
+	position: absolute;
+	display: block;
+	bottom: 0.375rem;
+	height: 0.125rem;
+	left: 0;
+	width: 100%;
+	content: "";
+	color: var(--cpge-color-reversedtext);
+	background-color: var(--cpge-color-reversedtext) !important;
+	-webkit-transition: background-color .2s ease,height .2s ease;
+	transition: background-color .2s ease,height .2s ease;
+	z-index: -1;
+}
+
+.blockquote.component.block-dark-blue a:is(:active, :focus, :hover)::before {
+	color: var(--cpge-color-spartanblue);
+	height: calc(100% - 0.75rem);
+	width: 100%;
+}
+/* ========== end ========== */
+
+
+/* Standard link style for components with */
+/* light blue background 			       */
+/* lhw - CPGE DDS */
+.block-light-blue {
+	color: var(--cpge-color-text);
+	background-color: var(--cpge-color-spartanltblue);
+}
+
+.block-light-blue.pattern div:after {
+    background-image: url(../../../_resources-cpge/img/feature-grid-1.png);
+	background-position: 100%;
+	content: "";
+	display: block;
+    opacity: 0.25;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+    height: 100%;
+	width: auto;
+	z-index: -1;
+}
+
+.blockquote.component.block-light-blue *:not(a) {
+	color: var(--cpge-color-text) !important;
+}
+
+.blockquote.component.block-light-blue a:not(.tags__link) {
+	display: inline-block;
+	padding: 0.25rem 0.125rem;
+	position: relative;
+	color: var(--cpge-color-text) !important;
+	-webkit-transition: color .2s ease;
+	transition: color .2s ease;
+}
+
+.blockquote.component.block-light-blue a:not(.tags__link):where(:link, :visited) {
+	color: var(--cpge-color-text);
+}
+
+.blockquote.component.block-light-blue a:not(.tags__link):where(:active, :focus, :hover) {
+	color: var(--cpge-color-spartanltblue) !important;
+}
+
+.blockquote.component.block-light-blue a:not(.tags__link)::before {
+	position: absolute;
+	display: block;
+	bottom: 0.375rem;
+	height: 0.125rem;
+	left: 0;
+	width: 100%;
+	content: "";
+	color: var(--cpge-color-text);
+	background-color: var(--cpge-color-spartanblue) !important;
+	-webkit-transition: background-color .2s ease,height .2s ease;
+	transition: background-color .2s ease,height .2s ease;
+	z-index: -1;
+}
+
+.blockquote.component.block-light-blue a:is(:active, :focus, :hover)::before {
+	color: var(--cpge-color-spartanltblue);
+	height: calc(100% - 0.75rem);
+	width: 100%;
+}
+/* ========== end ========== */
+
+
+/* Standard link style for components with   */
+/* light blue border -or- transparent (none) */
+/* lhw - CPGE DDS */
+.block-border, .block-none {
+	color: var(--cpge-color-spartanblue);
+	background-color: var(--cpge-color-reversedtext);
+}
+
+.block-border {
+	border: 8px solid #dbeeff;
+}
+
+.blockquote.component.block-border.pattern blockquote:after {
+	background-image: url(../../../_resources-cpge/img/next-steps.png);
+	background-position: 100%;
+	content: "";
+	display: block;
+	opacity: .04;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+    height: 110%;
+	width: auto;
+	z-index: -1;
+}
+
+.blockquote.component.block-border *:not(a) {
+	color: var(--cpge-color-text) !important;
+}
+
+.blockquote.component.block-border a:not(.tags__link) {
+	display: inline-block;
+	padding: 0.25rem 0.125rem;
+	position: relative;
+	color: var(--cpge-color-text) !important;
+	-webkit-transition: color .2s ease;
+	transition: color .2s ease;
+}
+
+.blockquote.component.block-border a:not(.tags__link):where(:link, :visited) {
+	color: var(--cpge-color-text);
+}
+
+.blockquote.component.block-border a:not(.tags__link):where(:active, :focus, :hover) {
+	color: var(--cpge-color-spartanltblue) !important;
+}
+
+.blockquote.component.block-border a:not(.tags__link)::before {
+	position: absolute;
+	display: block;
+	bottom: 0.375rem;
+	height: 0.125rem;
+	left: 0;
+	width: 100%;
+	content: "";
+	color: var(--cpge-color-text);
+	background-color: var(--cpge-color-spartanblue) !important;
+	-webkit-transition: background-color .2s ease,height .2s ease;
+	transition: background-color .2s ease,height .2s ease;
+	z-index: -1;
+}
+
+.blockquote.component.block-border a:is(:active, :focus, :hover)::before {
+	color: var(--cpge-color-spartanltblue);
+	height: calc(100% - 0.75rem);
+	width: 100%;
+}
+/* ========== end ========== */
+
+/* Snapshot Component - interior pages          */
+/* Expire this change after migration to source */
+/* Current source: NEW COMPONENT                */
+/* lhw - CPGE DDS */
+MAIN .snapshot {
+	background: #fefefe;
+	color: #0a0a0a;
+	position: relative;
+}
+
+.snapshot__inner {
+	position: relative;
+	font-size: 1rem;
+	z-index: 2;
+}
+
+.snapshot__title {
+	color: #0055a2;
+	margin-bottom: 1rem;
+	text-align: unset;
+}
+
+.snapshot__list {
+	-webkit-box-align: stretch;
+	-ms-flex-align: stretch;
+	align-items: stretch;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-flow: column;
+	flex-flow: column;
+	-webkit-box-pack: start;
+	-ms-flex-pack: start;
+	justify-content: flex-start;
+}
+
+.snapshot__item {
+	-webkit-box-align: start;
+	-ms-flex-align: start;
+	align-items: flex-start;
+	background-color: #fefefe;
+	border: 8px solid #dbeeff;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-flow: column;
+	flex-flow: column;
+	-webkit-flex-grow: 1;
+	-ms-flex-grow: 1;
+	flex-grow: 1;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	margin-bottom: 1rem;
+	padding: 1.25rem;
+	position: relative;
+}
+
+.snapshot__content {
+	margin: auto;
+	text-align: center;
+	padding-right: 3%;
+}
+
+.snapshot__content * {
+	word-break: normal;
+	overflow-wrap: break-word;
+}
+
+.snapshot__heading {
+	display: inline;
+	padding: 0.1875rem 0;
+	font-size: 2.25rem;
+	line-height: 1.1;
+	font-weight: 800;
+	color: #0055a2;
+}
+
+.snapshot__copy {
+	margin: 0;
+}
+
+@media print, screen and (min-width: 48em) {
+	.snapshot__list {
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		-ms-flex-flow: row wrap;
+		flex-flow: row wrap;
+	}
+
+	.snapshot__item {
+		width: calc(50% - 0.5rem);
+	}
+
+	.snapshot__item:nth-child(2n) {
+		margin-left: 1rem;
+	}
+
+	.snapshot .snapshot__heading {
+		font-size: calc( 1rem + ( 1280px * 0.025 ));
+	}
+}
+
+@media print, screen and (min-width: 64em) {	
+	.snapshot__title {
+		margin-bottom: 2.25rem;
+	}
+
+	.snapshot__item {
+		width: calc(33.33% - 0.6875rem);
+	}
+
+	.snapshot__item:nth-child(3n+1) {
+		margin-left: 0;
+	}
+
+	.snapshot__item:nth-child(3n+2), .snapshot__item:nth-child(3n+3) {
+		margin-left: 1rem;
+	}
+
+	.snapshot .snapshot__heading {
+		font-size: calc( 1rem + ( 1280px * 0.01 ));
+	}
+
+	.snapshot .snapshot__content {
+		text-align: initial;
+	}
+}
+
+@media screen and (min-width: 80em) { /* reduced rail at larger viewports */
+	.snapshot .snapshot__heading {
+		font-size: calc( 1rem + ( 1280px * 0.025 ));
+	}
+}
+/* ========== end ========== */
+
+
+
+/* Display cards 2 & 3, overriding previous */
+/* design. Consolidate override later in    */
+/* this file. Expire this change after      */
+/* migration to source                      */
+/* Source: main.css -> _card-program.scss   */
+/* lhw - CPGE DDS */
+.card-program:nth-child(2), .card-program:nth-child(3), 
+.events__item:nth-child(2), .events__item:nth-child(3), 
+.news .card-news:nth-child(2), .news .card-news:nth-child(3), 
+.card-faculty:nth-child(2), .card-faculty:nth-child(3) {
+	display: block;
+}
+
+@media print, screen and (min-width: 48em){
+	.card-program:nth-child(2), .card-program:nth-child(3), 
+	.x__events__item:nth-child(2), .x__events__item:nth-child(3), 
+	.news .card-news:nth-child(2), .news .card-news:nth-child(3), 
+	.card-faculty:nth-child(2), .card-faculty:nth-child(3) {
+		display: flex;
+	}
+}
+
+/* ========== end ========== */
+
+
+
+/* Full-width appplied to select interior components   */
+/* when used on landing and high-level pages.          */
+/* - Currently in class .wrapper in layout.scss        */
+/* - Components and snippets not uniformly ID'd        */
+/* lhw - CPGE DDS */
+
+MAIN:where(.main--landing, .main--high) :where( 
+.accordions, 
+.icon-array, 
+.next-steps, 
+.wysiwyg.user-markup.component, 
+FORM, 
+.testimonial, 
+.faculty, 
+end):not([class='wrapper']), 
+MAIN:where(.main--landing, .main--high) > P:not([class]) {
+    margin: 2.8125rem auto;
+    max-width: 80rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+
+MAIN:where(.main--landing, .main--high) > :is(UL, OL):not([class]) {
+    max-width: 65rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+    margin: 0 auto !important;
+}
+
+END--no-padding {
+    padding: 0
+}
+
+@media print, screen and (min-width: 64em) {
+	MAIN:where(.main--landing, .main--high) :where( 
+	.accordions, 
+	.icon-array, 
+	.next-steps, 
+	.wysiwyg.user-markup.component, 
+	FORM, 
+	.testimonial, 
+	.faculty, 
+	end):not([class='wrapper']), 
+	MAIN:where(.main--landing, .main--high) > P:not([class]) {
+		margin-bottom: 5.625rem;
+		margin-top: 5.625rem;
+	}
+}
+
+@media print,screen and (min-width: 90rem) {
+    END--no-padding {
+        padding: 0;
+    }
+}
+
+@media print,screen and (min-width: 90rem) {
+    MAIN:where(.main--landing, .main--high) :is(
+	.accordions, 
+	.icon-array, 
+	.next-steps, 
+	.wysiwyg.user-markup.component, 
+	FORM, 
+	.testimonial, 
+	.faculty,  
+	end):not([class='wrapper']), 
+	MAIN:where(.main--landing, .main--high) > :is(P, UL, OL):not([class]) {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+@media screen and (min-width: 90rem) {
+	MAIN:where(.main--landing, .main--high) > P:not([class]) {
+        padding: 0;
+        width: 80rem;
+    }
+	MAIN:where(.main--landing, .main--high) > :is(UL, OL):not([class]) {
+        padding: 0;
+        width: 65rem;
+    }
+}
+
+/* Department Links component use as QuickLinks on interior pages */
+/* originally set at main.css li:12790                            */
+@media print, screen and (min-width: 90em) {
+	.program-department__inner.wrapper {
+		width: auto;
+		padding: 0 5%;
+	}
+}
+
+/* ========== end ========== */
+
+
+/* Contact form radio buttong disambiguation */
+/* Dual duplicate set of radio buttons can be */
+/* implemented in the asset. */ 
+/* Required companion JS script in footcode.inc  */
+/* Current source: _forms.scss, _headings.scss, _radio-button.scss */
+/* lhs - CPGE */
+#next-steps-modal-zero .radio-input-page, MAIN .radio-input-popup {
+	display: none;
+}
+/* ========== end ========== */
+
+
+/* Media Gallery - Internal, optional border  */
+/* Adjusts for borderless yt thumbnails       */
+/* Current source: _resources-cpge/xsl/_shared/snippets.xsl */
+/* lhs - CPGE */
+.media__image-border {
+	border: 2px var(--cpge-color-spartanblue) solid;
+}
+/* ========== end ========== */
+
+
+/* Form Builder   */
+/* Cancel top margin for embeded Pardot form  */
+/* in interior page region.                   */ 
+/* Current source: https://study.sjsu.edu/css/form.css?ver=2021-09-20 */
+/* lhs - CPGE */
+DIV.content .form-builder.pardot-embed {
+	margin-top: -1.5rem;
+}
+/* ========== end ========== */
+
+
+/* Transparent CTAs letterspacing */
+/* Contact component left rail,   */
+/* for email address length       */
+/* lhw - CPGE DDS */
+.rail .contact.component .btn--cta {
+	letter-spacing: 0.025em;
+}
+/* ========== end ========== */
+
+
+/* Events - manual landing  */
+/* 2023-08-02 : Allow 1-up layout to list multiple events with spacing */
+/* lhw - CPGE DDS */
+.events__item {
+    padding-bottom: 2rem;
+}
+/* ========== end ========== */
+
+
+/* Events - Localist API       */
+/* Flex layout, image added   */
+/* 2023-08-02 added localist namespace */
+/* lhw - CPGE DDS */
+.localist .events__item, .localist .events__item:nth-child(2), .localist .events__item:nth-child(3) {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 16px;
+	margin-top: 1.5625rem;
+}
+
+@media print, screen and (min-width: 48em) {
+	.events--standard .localist .events__item, .events--standard .localist .events__item:nth-child(2), .events--standard .localist .events__item:nth-child(3)  {
+		flex-direction: row;
+	}
+	
+	.localist.events:not(.events--standard) .events__item {
+		width: 33%;
+	}
+}
+
+@media screen and (min-width: 90em) { 
+	/* overriding .wrapper at _layout.scss: li:52 */
+	.events__inner.wrapper {
+		padding: 0;
+		width: initial;
+	}
+}
+
+@media screen and (min-width: 64em) { 
+	/* overriding .wrapper at main.css: li:12790 */    
+	.events--standard .events__inner.wrapper {
+		padding: 0;
+	}
+}
+
+.localist .events__image {
+	max-width: 10rem;
+	margin: 0 1rem 1rem 0;
+	align-self: flex-start;
+	flex-shrink: 0;
+}
+
+.localist .events__content {
+	display: block;
+	align-self: flex-start;
+	flex-grow: 1;
+}
+
+.localist .events__description {
+	/* display: none; 1.1 :: adding event descriptions option TODO */
+	/* height: 4rem;  1.1 :: adding event descriptions option TODO */
+	/* width: 34rem;  1.1 :: adding event descriptions option TODO */
+	margin-bottom:  1rem;
+}
+
+.localist .events__experience {
+	text-transform: capitalize;
+}
+
+.localist .events--standard .events__buttons {
+    margin-top: 2rem;
+}
+
+.localist .events__past {
+	display: none;
+}
+
+.localist .events__past-item {
+	/* default to square, as iOS does not support ::marker pseudo selector */
+	/* list-style: square; commenting for tests */
+}
+
+.localist .events__past-title {
+	display: inline-block;
+	font-weight: 600;
+	text-transform: uppercase;
+	font-style: italic;
+}
+
+.localist .events__past-date {
+	margin: 0 .5rem;
+}
+
+.localist .events__past-heading {
+	display: inline-block;
+	margin-left: .5rem;
+	font-size: 1.375rem;
+}
+/* ========== end ========== */
+
+
+
+/* Blog - Wordpress API       */
+/* Flex layout, image added   */
+/* 2024-01-16 added wordpress namespace */
+/* lhw - CPGE DDS */
+
+/*
+both 1-COL & 2-COL: .main .main--level
+LANDING (HIGH LEVEL): .main .main--landing .main--high
+*/
+
+
+
+/* Alternate button placement for full-width layout */
+/* See min-width: 64em below for additional rules */
+/*
+.wordpress.news--high .news__buttons.horizontal {
+	display: none;
+}
+.wordpress:not(.news--high) .news__buttons.horizontal {
+	display: revert;
+}
+*/
+
+
+
+@media print, screen and (min-width: 48em) {
+	/* overriding . at 0.scss: li: */
+	.wordpress .card-news {
+		-webkit-box-pack: start;
+		-ms-flex-pack: start;
+		justify-content: flex-start;
+		/* align-items: flex-start; */
+	}
+
+	.wordpress .card-news__image {
+		/* overriding .card-news__image at card-news.scss */
+		/* margin: 0.5rem; */
+	}
+}
+
+@media screen and (min-width: 90em) { 
+	/* overriding .wrapper at _layout.scss: li:52 */
+	.wordpress .news__inner.wrapper {
+		width: initial;
+	}
+}
+
+@media screen and (min-width: 64em) { 
+	/* overriding .news__intro at _news.scss: li:60 */
+	.wordpress .news__intro {
+		width: 100%;
+	}
+	/* overriding {media min-width:64em} .news--standard .news__title at _program-department.scss: li:7  */
+	.wordpress h2, .wordpress .news--standard h2 {
+		margin-bottom: .75rem !important;
+	}
+	.wordpress.posts:not(.news--standard, .news--faq) .news__intro-section {
+		margin-right: 3.125rem;
+		width: 33%;
+	}
+	
+	/* Upper horizontal button visible on high-level page */
+	.wordpress.news--high .news__buttons.horizontal {
+		display: revert;
+	}
+	
+	/* Lower vertical button not visible on high-level page */
+	.wordpress.news--high .news__buttons.vertical {
+		display: none;
+	}
+}
+
+/* Alternate button placement for full-width layout */
+/* Landing page - full-width [ .news--high ] */
+/* Interior page  [ :not(.news--high) ]  */
+/* overriding .news__buttons at _news.scss: li: (various) */
+/* See also media query min-width: 64em  */
+
+/* Upper horizontal button not visible by default */
+.news__buttons.horizontal {
+	display: none;
+}
+
+/* Lower vertical button visible by default */
+.wordpress .news__buttons.vertical {
+	display: revert;
+}
+
+
+.wordpress .card-news {
+	/* padding: 1.5rem 1rem 1rem 1.5rem; */
+}
+
+.wordpress .news__content {
+	padding: 0.75rem 0.5rem 0.5rem 1.25rem;
+}
+
+.wordpress .news__intro, .wordpress .news__intro a {
+	/* net new */ 
+	color: #ffffff;
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.wordpress .news__intro {
+    margin: 0rem 0 1.5rem 0;
+}
+
+.wordpress .news__intro a {
+	 text-decoration: underline;
+ }
+
+.wordpress .news__date {
+	font-size: 1.25rem;
+}
+
+.wordpress .news__description {
+	margin-bottom: 1rem;
+	/* white-space: nowrap; */ /* Prevent text wrapping */
+	overflow: hidden; /* Hide overflowing text */
+	text-overflow: ellipsis; /* Display ellipsis for truncated text */
+	/* height: 4rem; */
+}
+
+
+/* Wordpress FAQ mode overrides */
+.wordpress.news--faq .news__date, 
+.wordpress.news--faq .card-news__descriptino {
+	display: none;
+}
+
+.wordpress.news--faq {
+	background: none;
+	padding: 0px;
+}
+
+.wordpress.news--faq .news__inner.wrapper {
+    padding: 0px;
+}
+
+.wordpress.news--faq .news__intro-section .news__title {
+	color: var(--cpge-color-spartanblue);
+}
+
+.wordpress.news--faq .news__intro-section .news__intro {
+	color: inherit;
+	font-weight: inherit;
+}
+
+.wordpress.news--faq .news__heading {
+	font-size: 1.375rem;
+	line-height: 1.0;
+}
+
+.wordpress.news--faq .card-news__copy, 
+.wordpress.news--faq .card-news {
+	padding: 0px;
+}
+
+.wordpress.news--faq a.news__link {
+	text-decoration: underline;
+}
+
+/* component folio */
+html#cms-inline-editor-id .wordpress.component::before {
+	content: attr(data-folio);
+	display: block;
+	position: absolute;
+	/* 	top: -45px; */
+	top: -55px;
+	left: 0px;
+	/* 	height: 45px; */
+	height: 68px;
+	/* background-color: #A8D8F8; blue */
+	background-color: #FAEEAA;
+	border-radius: 8px 8px 0px 0px;
+	/* border: 3px #408CC4 dotted; blue */
+	border: 3px #BB9000 dotted;
+	border-width: 3px 3px 0px 3px;
+	padding: 0.3rem 0.4rem;
+	align-content: center;
+	font: bold 0.9rem / 1rem sans-serif;
+	color: #665511;
+	white-space: pre;
+}
+
+.wordpress.component::before {
+	display: none;
+	content: unset;
+}
+/* ========== end ========== */
+
+
+
+/* Split Headings into two links   */
+/* Table transform in header.pcf's */
+/* lhw - CPGE DDS */
+
+/* _breakpoint.scss:177 */
+.global-header__titles .global-header__title, 
+.global-header__titles .global-header__subtitle {
+	display: block;
+    font-size: 1.86313rem;
+    font-weight: 700;
+    line-height: 1.08688;
+    padding-right: 1.25rem;
+}
+
+.global-header__titles .global-header__subtitle {
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.3;
+}
+
+.global-header__titles .global-header__title, 
+.global-header__titles .global-header__subtitle, 
+.global-header__titles .global-header__title A, 
+.global-header__titles .global-header__subtitle A {
+	color: #fefefe !important;
+}
+
+/* _global-header.scss:50 */
+/* _global-header.scss:47 */
+/* _global-header.scss:41 */
+@media print, screen and (min-width: 64em) {
+	.global-header__titles .global-header__title, 
+	.global-header__titles .global-header__subtitle	{
+	    font-size: 2.07rem;
+	    padding-right: 0;
+	}
+
+	.global-header__titles .global-header__subtitle {
+	    font-size: 1.4375rem;
+	    line-height: 1.47826;
+	}
+}
+/* ========== end ========== */
+
+
+/* CPGE Header: submenu fills remaining width via */
+/* parent's display flex when quicklinks is empty */
+/* scss source: _breakpoint.scss 182 */
+/* scss source: _desktop-nav.scss 43 */
+/* css: /aspis/cpge/css/main.css  6999, 7004, 7011 */
+/* lhw - CPGE DDS */
+.global-header #desktop-nav .desktop-nav__section {
+	width: 100%;
+}
+
+/* If desktop-nav__menu has only one  child   */
+/* child div (no quicklink div present), then */
+/* set links in 3 columns for better spacing  */
+.global-header #desktop-nav .desktop-nav__menu > :only-child ul.desktop-nav__column {
+    -webkit-column-count: 3;
+    column-count: 3;
+}
+/* ========== end ========== */
+
+
+/*      - TURNED OFF -                  */
+/* TEST: Email as hover reveal          */
+/* Reduces size                         */
+/* Removes word breaks                  */
+/* <div class="contact component hover-email" */
+/* Component requires hover-email class */
+/* Component requires title="email@sjsu.edu" */
+/* lhw - CPGE DDS */
+.contact.component.hover-email a[href^="mailto"] {
+	padding: 3px
+}
+
+.contact.component.hover-email a[href^="mailto"]:after {
+    content: attr(title);
+    display: block;
+    width: calc(100% + 6px);
+    margin-left: -3px;
+    margin-bottom: -1.5rem;
+    border: 0.3rem #004080 solid;
+    background: #004080;
+    font-size: .95rem;
+    font-weight: bold;
+    letter-spacing: -0.5rem;
+    color: #ffffff;
+    white-space: nowrap;
+    visibility: hidden;
+}
+
+.contact.component.hover-email a[href^="mailto"]:hover:after {
+	letter-spacing: normal;
+    visibility: visible;
+    transition: visibility .3s ease;
+}
+/* ========== end ========== */
+
+
+/*      - TURNED OFF -                 */
+/* TEST: Contact email at smaller size */
+/* Reduces size to 1rem (16pt)         */
+/* Reduces letter-spacing normal       */
+/* lhw - CPGE DDS */
+.contact.component a[href^="mailto"] {
+/*
+	font-size: 1rem;
+	letter-spacing: normal;
+	color: #003a70;
+*/
+}
+
+.contact.component a[href^="mailto"]:hover {
+/*
+	color: #fefefe;
+*/
+}
+/* ========== end ========== */
+
+
+/* Intro Array row spacing         */
+/* Add space, except last row      */
+/* Each row is a separate flexbox, */
+/* so can't use gap-row            */
+/* source: /aspis/assets/scss/organisms/_introduction-array.scss */
+/* lhw - CPGE DDS */
+.introduction-array__items {
+	margin-bottom: 3rem;
+}
+
+.introduction-array__inner.wrapper div:last-of-type {
+	margin-bottom: 0px;
+}
+/* ========== end ========== */
+
+
+/* Suppress News Atrribute and Tags displays */
+/* source: no source, net new */
+/* lhw - CPGE DDS  */
+.aggregate--news div.rail.column > form:nth-child(1), .aggregate--news .news__items ul.tags {
+	display: none;
+}
+/* ========== end ========== */
+
+
+/* Generic content loading panel */
+/* source: no source, net new */
+/* lhw - CPGE DDS  */
+@-webkit-keyframes dds-load-anim {
+	0% {
+		transform: translate3d(-30%,0,0)
+	}
+	to {
+		transform: translate3d(30%,0,0)
+	}
+}
+@keyframes dds-load-anim {
+	0% {
+		transform: translate3d(-30%,0,0)
+	}
+	to {
+		transform: translate3d(30%,0,0)
+	}
+}
+.content-loader:before {
+	-webkit-animation: dds-load-anim 1.3s linear infinite;
+	animation: dds-load-anim 1.3s linear infinite;
+	background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 46%, hsla(0, 0%, 100%, .35) 50%, hsla(0, 0%, 100%, 0) 54%) 50% 50%;
+	bottom: 0;
+	content: " ";
+	left: 50%;
+	margin-left: -350%;
+	pointer-events: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 500%;
+	z-index: 1;
+}
+.content-loader {
+	background-color: #d0dbf0 !important;
+}
+/* ========== end ========== */
+
+
+
+.chip {
+	display:inline-block;
+}
+span.checkbox.checked {
+	background-color:#e5a823;
+}
+
+span.checkbox.checked .brei-icon-check {
+	opacity:1;
+}
+
+form .filter-checkboxes.component {
+	margin-bottom: 2.8125rem !important;
+}
+
+.chip__label {
+	border-left: 0 solid #0055a2; 
+	display: inline-block;
+	margin-left: 0; 
+	padding-left: 0.625rem;
+	padding-right: 0.375rem;
+}
+
+.card-program.main-ou:nth-child(2), .card-program.main-ou:nth-child(3) {
+	display: block;
+}
+
+@media print, screen and (min-width: 48em){
+	.card-program.main-ou:nth-child(2), .card-program.main-ou:nth-child(3) {
+		display: flex;
+	}
+}
+
+/* remove div on landing page used when no image is added */
+@media print, screen and (max-width: 1023px) {
+	.main__wrapper.wrapper.ou_remove_div {
+		display: none;
+	}
+}
+
+/* add space between button and second row into array */
+/* superceded by above .introduction-array__items selector */
+.introduction-array__item a.btn {
+/*	margin-bottom: 2em; */
+}
+
+span#directedit a#de {
+	color:#fefefe;
+}
+
+/*remove link in program finder buttons - omni */
+.chip:hover::before {			
+	padding: 0;
+}
