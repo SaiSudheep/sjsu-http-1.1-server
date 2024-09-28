@@ -8,10 +8,8 @@ Assignment Name:
 
 Instructions for running your program:
 
-	Unpack the tarball
 	Open terminal at the folder’s path
 	Disconnect from the internet
-	Type in “source venv/bin/activate”
 	Type in “python server.py -document_root “webserver_files_directory” -port “port_number”
 
 	(Please use the complete path of webserver_files)
